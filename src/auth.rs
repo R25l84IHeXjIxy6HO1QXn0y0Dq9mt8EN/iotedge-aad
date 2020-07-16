@@ -46,6 +46,7 @@ impl Auth {
             .append_pair("client_id", client_id)
             .append_pair("client_secret", client_secret)
             .append_pair("scope", scope)
+            .append_pair("resource", self.resource)
             .finish();
 
         let res = self
