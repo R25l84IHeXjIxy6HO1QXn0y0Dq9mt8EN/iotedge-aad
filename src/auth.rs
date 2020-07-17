@@ -13,8 +13,7 @@ pub struct Auth {
 }
 
 impl Auth {
-    pub fn new(client: Option<Arc<Client>>, resource: &'static str) -> Self {
-        let client = client.unwrap_or(Arc::new(Client::new()));
+    pub fn new(client: Arc<Client>, resource: &'static str) -> Self {
         Self {
             client,
             resource
@@ -22,11 +21,11 @@ impl Auth {
     }
 
     pub fn graph(client: Arc<Client>) -> Self {
-        Self::new(Some(client), "https://graph.microsoft.com")
+        Self::new(client, "https://graph.microsoft.com")
     }
 
     pub fn azure(client: Arc<Client>) -> Self {
-        Self::new(Some(client), "https://management.azure.com")
+        Self::new(client, "https://management.azure.com")
     }
 
     pub async fn authorize_with_secret(
